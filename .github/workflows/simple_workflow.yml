@@ -2,10 +2,7 @@ name: Simple Workflow
 
 on:
   push:
-    branches:
-      - '*'         # matches every branch that doesn't contain a '/'
-      - '*/*'       # matches every branch containing a single '/'
-      - '**'  
+    branches: [ "*" ]
 
 jobs:
   build:
