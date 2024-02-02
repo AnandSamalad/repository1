@@ -7,7 +7,7 @@ on:
 jobs:
   build1:
     environment: env1
-    runs-on: ubuntu-latest
+    runs-on: ${{ runner }}
 
     steps:
     - name: Step 1
@@ -18,7 +18,7 @@ jobs:
 
   build:
     environment: env2
-    runs-on: ubuntu-latest
+    runs-on: ${{ runner2}}
 
     steps:
     - name: Step 1
