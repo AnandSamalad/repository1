@@ -7,7 +7,7 @@ on:
 jobs:
   build1:
     environment: env1
-    runs-on: ${{ runner }}
+    runs-on: ${{ RUNNER }}
 
     steps:
     - name: Step 1
@@ -18,7 +18,7 @@ jobs:
 
   build:
     environment: env2
-    runs-on: ${{ runner2}}
+    runs-on: ${{ RUNNER2}}
 
     steps:
     - name: Step 1
