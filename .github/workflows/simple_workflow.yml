@@ -5,9 +5,20 @@ on:
     branches: [ "*" ]
 
 jobs:
-  build:
+  build1:
     environment: env1
-    runs-on: "${{ vars.RUNNER }}"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Step 1
+      run: echo "${{ vars.RUNNER }}"
+
+    - name: Step 2
+      run: echo "This is step 2"
+
+  build:
+    environment: env2
+    runs-on: ubuntu-latest
 
     steps:
     - name: Step 1
