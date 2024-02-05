@@ -4,13 +4,10 @@ on:
   push:
     branches: [ "*" ]
 
-env:
-  ENV_CONTEXT_VAR: "ubuntu-latest"
-
 jobs:
   build1:
-    if: ${{ env.USE_VARIABLES == 'true' }}
     runs-on: ${{ env.RUNNER }}
+    environment: ${{ env.ENVIRONMENT_STAGE }}
 
     steps:
     - name: Step 1
