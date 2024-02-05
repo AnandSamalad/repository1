@@ -6,7 +6,7 @@ on:
 
 jobs:
   build1:
-    runs-on: ${{ env.RUNNER }}
+    runs-on: ${{ RUNNER }}
     environment: env1
 
     steps:
