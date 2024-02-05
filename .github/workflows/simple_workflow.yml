@@ -8,6 +8,8 @@ jobs:
   build1:
     environment: env1
     runs-on: ${{ env.RUNNER }}
+    env:
+      RUNNER: env1
 
     steps:
     - name: Step 1
