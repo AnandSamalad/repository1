@@ -56,4 +56,4 @@ jobs:
     #     fast-fail: [true]
     steps:
     - name: echo1
-      run: echo ${{ matrix.environment }}
+      run: echo ${{ build1.outputs.environment }}
