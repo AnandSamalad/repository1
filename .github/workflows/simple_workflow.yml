@@ -40,8 +40,9 @@ jobs:
       uses: actions/checkout@v4
       # Set output with JSON format for later use
       id: checkout
-      run: echo "::set-output name=environment::./deployment-config.json"
-    
+      run: |
+        content=$(<./deployment-config.json)
+        echo "::set-output name=environment::${content}"
 
   build2:
     runs-on: ubuntu-latest
