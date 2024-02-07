@@ -56,4 +56,4 @@ jobs:
     #     fast-fail: [true]
     steps:
     - name: echo1
-      run: echo "Environment: ${{ toJson(needs.build1.outputs.environment) }}"
+      run: echo "Environment: ${{ needs.build1.outputs.environment }}"
