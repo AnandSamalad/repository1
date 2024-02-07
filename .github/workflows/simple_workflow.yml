@@ -43,10 +43,10 @@ jobs:
 
     - name: Read JSON file and set output
       id: read_json
-      run: 
+      run: |
 
           JSON=$(cat ./deployment-config.json)
-        # echo "$JSON" >> "${GITHUB_OUTPUT}"
+          echo "$JSON" >> "${GITHUB_OUTPUT}"
 
   # build2:
   #   runs-on: ubuntu-latest
