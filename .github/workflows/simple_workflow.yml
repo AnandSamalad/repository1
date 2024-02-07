@@ -6,23 +6,12 @@ on:
 
 jobs:
   build1:
-    environment: env1
-    runs-on: ${{ RUNNER }}
+    runs-on: ${{ env.RUNNER }}
+    environment: ${{ env.ENVIRONMENT_STAGE }}
 
     steps:
     - name: Step 1
       run: echo "${{ vars.RUNNER }}"
-
-    - name: Step 2
-      run: echo "This is step 2"
-
-  build:
-    environment: env2
-    runs-on: ${{ RUNNER2}}
-
-    steps:
-    - name: Step 1
-      run: echo "${{ vars.RUNNER2 }}"
 
     - name: Step 2
       run: echo "This is step 2"
