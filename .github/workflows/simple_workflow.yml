@@ -42,7 +42,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Read JSON file and set output
-      id: read_json
+      # id: read_json
       run: echo ${{ vars.MULTIPLE }}
 
           # JSON=$(cat ./deployment-config.json)
