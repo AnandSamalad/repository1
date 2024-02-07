@@ -6,13 +6,23 @@ on:
 
 jobs:
   build1:
-    runs-on: ${{ env.RUNNER }}
-    environment: ${{ env.ENVIRONMENT_STAGE }}
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Step 1
-      run: echo "${{ vars.RUNNER }}"
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        environment: ${{ toJson(fromJson(file('./environments.json'))) }}    
+    
 
-    - name: Step 2
-      run: echo "This is step 2"
+  build2:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ${{ fromJson(inputs.environment) }}
+        fast-fail: [true]
+    steps:
+    - name: echo1
+      run: echo ${{ matrix.environment }}
 
+    
