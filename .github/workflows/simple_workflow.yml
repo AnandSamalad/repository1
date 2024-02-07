@@ -1,3 +1,30 @@
+# name: Simple Workflow
+
+# on:
+#   push:
+#     branches: [ "*" ]
+
+# jobs:
+#   build1:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout Repository
+#       uses: actions/checkout@v4
+#       with:
+#         environment: echo "./deployment-config.json"     
+    
+
+#   build2:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         environment: ${{ fromJson(inputs.environment) }}
+#         fast-fail: [true]
+#     steps:
+#     - name: echo1
+#       run: echo ${{ matrix.environment }}
+
 name: Simple Workflow
 
 on:
@@ -11,18 +38,18 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
-      with:
-        environment: echo "./deployment-config.json"     
+      # Set output with JSON format for later use
+      id: checkout
+      run: echo "::set-output name=environment::./deployment-config.json"
     
 
   build2:
     runs-on: ubuntu-latest
+    needs: build1
     strategy:
       matrix:
-        environment: ${{ fromJson(inputs.environment) }}
+        environment: ${{fromJson(needs.build1.outputs.environment)}}
         fast-fail: [true]
     steps:
     - name: echo1
       run: echo ${{ matrix.environment }}
-
-    
