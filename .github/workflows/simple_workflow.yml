@@ -44,8 +44,8 @@ jobs:
     - name: Read JSON file and set output
       id: read_json
       run: |
-        content=$(<./deployment-config.json)
-        echo "::set-output name=environment::${content}"
+        JSON="$(cat ./.github/workflows/deployment-config.json)")
+        echo "$JSON" >> "${GITHUB_OUTPUT}"
 
   build2:
     runs-on: ubuntu-latest
@@ -56,4 +56,4 @@ jobs:
     #     fast-fail: [true]
     steps:
     - name: echo1
-      run: echo " ${{ toJson(needs.build1.outputs.environment) }}"
+      run: echo "${GITHUB_OUTPUT}"
