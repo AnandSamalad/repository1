@@ -34,19 +34,19 @@ on:
 jobs:
   build1:
     runs-on: ubuntu-latest
-    outputs:
-      environment: ${{ steps.read_json.outputs.environment }}
-
+    # outputs:
+    #   environment: ${{ steps.read_json.outputs.environment }}
+    environment: env1
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
     - name: Read JSON file and set output
       id: read_json
-      run: |
+      run: echo ${{ vars.MULTIPLE }}
 
-          JSON=$(cat ./deployment-config.json)
-          echo "$JSON" >> "${GITHUB_OUTPUT}"
+          # JSON=$(cat ./deployment-config.json)
+          # echo "$JSON" >> "${GITHUB_OUTPUT}"
 
   # build2:
   #   runs-on: ubuntu-latest
