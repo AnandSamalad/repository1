@@ -34,12 +34,15 @@ on:
 jobs:
   build1:
     runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.read_json.outputs.environment }}
 
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
-      # Set output with JSON format for later use
-      id: checkout
+
+    - name: Read JSON file and set output
+      id: read_json
       run: |
         content=$(<./deployment-config.json)
         echo "::set-output name=environment::${content}"
