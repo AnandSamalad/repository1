@@ -8,10 +8,10 @@ jobs:
   expose-dummy:
     runs-on: ubuntu-latest
     outputs:
-      dummy: ${{ steps.expose-dummy.outputs.dummy }}
+      dummy: ${{ steps.job1.outputs.dummy }}
     steps:
       - name: echo a dummy output
-        run: echo "::set-output name=runnerList::['ubuntu-latest', 'windows-latest', 'macos-latest']"
+        run: echo "dummy={["ubuntu-latest", "windows-latest", "macos-latest"]} >> $GITHUB_OUTPUT"
 
       - name: echoing in same step
         run: echo "Runner list:${{ needs.expose-dummy.outputs.dummy }}"
