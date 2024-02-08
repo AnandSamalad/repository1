@@ -7,7 +7,7 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
-    environment: ubuntu-latest
+    environment: env1
     outputs:
       matrix: ${{ steps.job1.outputs.matrix }}
     steps:
