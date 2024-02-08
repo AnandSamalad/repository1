@@ -1,10 +1,6 @@
 name: Run on Multiple Runners
 
 on:
-  workflow_run:
-    workflows: ["Expose Configuration Variable"]
-    types:
-      - completed
   workflow_dispatch:
 
 jobs:
