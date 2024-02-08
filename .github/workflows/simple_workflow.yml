@@ -11,8 +11,8 @@ jobs:
     steps:
     - name: Set os list
       run: |
-        OS_LIST = ${{ vars.LIST }} 
-        echo "::set-env name=OS_LIST::$OS_LIST"
+        echo "OS_LIST = ${{ env.LIST }}" >> $GITHUB_ENV
+# echo "::set-env name=OS_LIST::$OS_LIST"
       
   my_job:
     runs-on: ${{ matrix.os }}
