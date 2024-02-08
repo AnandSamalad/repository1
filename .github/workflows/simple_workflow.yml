@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Dummy Step
         run: echo "This is a dummy step."
+      - name: Print runnerList
+        run: echo "Runner list:${{ needs.expose-variable.outputs.runnerList }}""
   my_job:
     runs-on: ${{ matrix.os }}
     strategy:
