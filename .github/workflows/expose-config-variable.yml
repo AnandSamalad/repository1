@@ -1,16 +1,13 @@
 name: Expose Configuration Variable
 
 on:
-  workflow_run:
-    workflows: ["Your Main Workflow Name"]
-    types:
-      - requested
+  workflow_dispatch:
 
 jobs:
   expose-variable:
     runs-on: ubuntu-latest
     outputs:
-      osList: ${{ steps.expose.outputs.osList }}
+      runnerList: ${{ steps.expose.outputs.runnerList }}
     steps:
-      - name: Expose OS list
-        run: echo "::set-output name=osList::${{ github.event.workflow_run.inputs.LIST }}"
+      - name: Expose Runner List
+        run: echo "::set-output name=runnerList::${{ toJson(env.RUNNER_LIST) }}"
