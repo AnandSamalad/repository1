@@ -1,7 +1,8 @@
 name: Expose Configuration Variable
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [ "*" ]
 
 jobs:
   expose-variable:
