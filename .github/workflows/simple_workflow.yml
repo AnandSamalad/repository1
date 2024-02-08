@@ -8,10 +8,15 @@ jobs:
   set_list:
     runs-on: ubuntu-latest
     environment: env1
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
     - name: Set os list
       run: |
-        echo "OS_LIST = ${{ env.LIST }}" >> $GITHUB_ENV
+        matrix= "${{ env.LIST }}"
+        echo "matrix={\"include\": [${matrix}]}" >> $GITHUB_ENV
+        echo $matrix
+# echo "OS_LIST = ${{ env.LIST }}" >> $GITHUB_ENV
 # echo "::set-env name=OS_LIST::$OS_LIST"
       
   my_job:
@@ -19,7 +24,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ${{fromJson(env.OS_LIST)}}
+        os: ${{fromJson(needs.set_list.outputs.matrix)}}
 
     steps:
     - name: Check-out
