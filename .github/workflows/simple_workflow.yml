@@ -14,7 +14,7 @@ jobs:
     - name: Set os list
       run: |
         matrix="${{ env.LIST }}"
-        echo "matrix={\"include\": [${matrix}]}" >> $GITHUB_ENV
+        echo "matrix={\"os\": [${matrix}]}" >> $GITHUB_ENV
         echo $matrix
 # echo "OS_LIST = ${{ env.LIST }}" >> $GITHUB_ENV
 # echo "::set-env name=OS_LIST::$OS_LIST"
