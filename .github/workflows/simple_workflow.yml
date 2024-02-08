@@ -1,27 +1,23 @@
-name: Main Workflow
+name: Run on Multiple Runners
 
 on:
-  push:
-    branches: [ "*" ]
+  workflow_run:
+    workflows: ["Expose Configuration Variable"]
+    types: 
+      - completed
 
 jobs:
-  set_list:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ needs.expose-variable.outputs.osList }}
-    steps:
-      - name: Use Exposed OS List
-        run: echo ${{ matrix.os }}
-
   my_job:
-    needs: set_list
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runner }}
+    needs: expose
     strategy:
       matrix:
-        os: ${{fromJson(needs.set_list.outputs.matrix)}}
+        runner: ${{fromJson(needs.expose.outputs.runnerList)}}
 
     steps:
       - name: Check-out
         uses: actions/checkout@v4
-      - name: Echo A Var
-        run: echo ${{ matrix.os }}
+      - name: Echo the matrix
+        run: echo "${{ matrix.runner }}"
+      
+      # Add your job steps here
