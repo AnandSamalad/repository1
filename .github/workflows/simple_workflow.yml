@@ -15,7 +15,7 @@ jobs:
       run: |
         matrix="${{ vars.LIST }}"
         echo "matrix={${matrix}}" >> $GITHUB_ENV
-        echo "::set-output name=matrix::${matrix}"
+        echo "::set-output name=matrix::{[${matrix}]}"
 # echo "::set-output name=matrix::${matrix}"
      
     - name: Echo the output
