@@ -19,7 +19,7 @@ jobs:
 # echo "::set-output name=matrix::${matrix}"
      
     - name: Echo the output
-      run: echo "${ steps.set-matrix.outputs.matrix }"
+      run: echo "${{ steps.set-matrix.outputs.matrix }}"
         
 # echo "::set-output name=matrix::${matrix}"
 # matrix="${{ env.LIST }}"
