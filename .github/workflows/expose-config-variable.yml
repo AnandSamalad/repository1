@@ -10,7 +10,7 @@ jobs:
   expose-variable:
     runs-on: ubuntu-latest
     outputs:
-      osList: ${{ steps.expose.outputs.LIST }}
+      osList: ${{ steps.expose.outputs.osList }}
     steps:
       - name: Expose OS list
         run: echo "::set-output name=osList::${{ github.event.workflow_run.inputs.LIST }}"
