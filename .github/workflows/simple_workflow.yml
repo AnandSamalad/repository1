@@ -5,16 +5,18 @@ on:
     branches: [ "*" ]
 
 jobs:
-  expose-dummy:
+  job1:
     runs-on: ubuntu-latest
+    environment: ubuntu-latest
     outputs:
-      dummy: ${{ steps.expose-dummy.outputs.dummy }}
+      matrix: ${{ steps.job1.outputs.matrix }}
     steps:
-      - name: echo a dummy output
-        run: echo "dummy=["ubuntu-latest", "windows-latest", "macos-latest"]" >> $GITHUB_OUTPUT
-
-      - name: echoing in same step
-        run: echo "Runner list:${{ needs.expose-dummy.outputs.dummy }}"
+      - id: set-matrix
+        run: |
+          matrix="${{vars.RUNNERS}}" 
+          echo "$matrix"
+          echo "matrix={\"include\":"$(echo "${{vars.RUNNERS}}")"} >> $GITHUB_OUTPUT"
+          echo "${{ steps.job1.outputs.matrix }}"
   # expose-variable:
   #   environment: env1
   #   runs-on: ubuntu-latest
@@ -30,7 +32,7 @@ jobs:
       - name: Dummy Step
         run: echo "This is a dummy step."
       - name: Print runnerList
-        run: echo "Runner list:${{ needs.expose-dummy.outputs.dummy }}"
+        run: echo "Runner list:${{ steps.job1.outputs.matrix }}"
   # my_job:
   #   runs-on: ${{ matrix.os }}
   #   strategy:
