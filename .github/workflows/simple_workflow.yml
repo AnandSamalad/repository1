@@ -15,7 +15,10 @@ jobs:
       run: |
         matrix="${{ env.LIST }}"
         echo "matrix={\"os\": [${matrix}]}" >> $GITHUB_ENV
-        echo "${{ steps.set_list.outputs.matrix }}"
+        echo "::set-output name=matrix::${matrix}"
+# matrix="${{ env.LIST }}"
+# echo "matrix={\"os\": [${matrix}]}" >> $GITHUB_ENV
+# echo "${{ steps.set_list.outputs.matrix }}"
 # echo "OS_LIST = ${{ env.LIST }}" >> $GITHUB_ENV
 # echo "::set-env name=OS_LIST::$OS_LIST"
       
@@ -24,7 +27,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ${{fromJson(needs.set_list.outputs.matrix)}}
+        os: ${{fromJson(needs.set_list.outputs.matrix).os}}
 
     steps:
     - name: Check-out
