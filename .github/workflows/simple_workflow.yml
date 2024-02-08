@@ -27,9 +27,10 @@ jobs:
 # echo "::set-env name=OS_LIST::$OS_LIST"
       
   my_job:
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    # outputs:
+    #   matrix: ${{ steps.set-matrix.outputs.matrix }}
     needs: set_list
+    environment: env1
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
