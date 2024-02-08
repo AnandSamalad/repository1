@@ -12,12 +12,12 @@ jobs:
     needs: expose
     strategy:
       matrix:
-        runner: ${{fromJson(needs.expose.outputs.runnerList)}}
+        runner: ${{fromJson(env.runnerList)}}
 
     steps:
       - name: Check-out
         uses: actions/checkout@v4
-      - name: Echo the matrix
-        run: echo "${{ matrix.runner }}"
+      - name: Echo Something
+        run: echo "${{ matrix.runner }}
       
       # Add your job steps here
