@@ -8,6 +8,15 @@ on:
   workflow_dispatch:
 
 jobs:
+  expose-variable:
+    environment: env1
+    runs-on: ubuntu-latest
+    outputs:
+      runnerList: ${{ steps.expose.outputs.runnerList }}
+    steps:
+      - name: Expose Runner List
+        run: echo "::set-output name=runnerList::${{ toJson(vars.RUNNER_LIST) }}"
+
   dummy_job:
     runs-on: ubuntu-latest
     steps:
