@@ -1,8 +1,10 @@
 name: Expose Configuration Variable
+
 on:
   push:
-    branches: 
-      - "*" 
+    branches:
+      - '*'
+
 jobs:
   expose-variable:
     runs-on: ubuntu-latest
@@ -10,5 +12,4 @@ jobs:
       runnerList: ${{ steps.expose.outputs.runnerList }}
     steps:
       - name: Expose Runner List
-        id: expose
-        run: echo "runnerList=${{ toJson(env.RUNNER_LIST) }}" >> $GITHUB_ENV
+        run: echo "::set-output name=runnerList::${{ toJson(env.RUNNER_LIST) }}"
