@@ -1,10 +1,21 @@
-# name: Simple Workflow
+name: Simple Workflow
 
-# on:
-#   push:
-#     branches: [ "*" ]
+on:
+  push:
+    branches: [ "*" ]
+    
+jobs:
+  my_job:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
-# jobs:
+    steps:
+    - name: Check-out
+      uses: actions/checkout@v4
+    - name: Echo A Var
+      run: echo ${{ matrix.os }}
 #   build1:
 #     runs-on: ubuntu-latest
 
@@ -25,27 +36,27 @@
 #     - name: echo1
 #       run: echo ${{ matrix.environment }}
 
-name: Simple Workflow
+# name: Simple Workflow
 
-on:
-  push:
-    branches: [ "*" ]
+# on:
+#   push:
+#     branches: [ "*" ]
 
-jobs:
-  build1:
-    runs-on: ubuntu-latest
-    # outputs:
-    #   environment: ${{ steps.read_json.outputs.environment }}
-    environment: env1
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-      with:
-          environment: ${{ vars.LIST }}
+# jobs:
+#   build1:
+#     runs-on: ubuntu-latest
+#     # outputs:
+#     #   environment: ${{ steps.read_json.outputs.environment }}
+#     environment: env1
+#     steps:
+#     - name: Checkout Repository
+#       uses: actions/checkout@v4
+#       with:
+#           environment: ${{ vars.LIST }}
 
-    - name: Read JSON file and set output
+    # - name: Read JSON file and set output
       # id: read_json
-      run: echo ${{ vars.LIST }}
+      # run: echo ${{ vars.LIST }}
 
           # JSON=$(cat ./deployment-config.json)
           # echo "$JSON" >> "${GITHUB_OUTPUT}"
