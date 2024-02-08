@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ${{fromJson(env.LIST)}}
+        os: ${{fromJson(env1.LIST)}}
 
     steps:
     - name: Check-out
