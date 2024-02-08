@@ -13,4 +13,4 @@ jobs:
       runnerList: ${{ steps.expose.outputs.runnerList }}
     steps:
       - name: Expose Runner List
-        run: echo "::set-output name=runnerList::${{ toJson(vars.RUNNER_LIST) }}"
+        run: echo "::set-output name=runnerList::${{ toJson(env.RUNNER_LIST) }}"
