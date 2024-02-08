@@ -3,21 +3,15 @@ name: Run on Multiple Runners
 on:
   workflow_run:
     workflows: ["Expose Configuration Variable"]
-    types: 
+    types:
       - completed
 
 jobs:
   my_job:
-    runs-on: ${{ matrix.runner }}
-    needs: expose
-    strategy:
-      matrix:
-        runner: ${{fromJson(env.runnerList)}}
-
+    runs-on: ${{ fromJson(needs.expose-variable.outputs.runnerList) }}
+    needs: expose-variable
     steps:
       - name: Check-out
         uses: actions/checkout@v4
-      - name: Echo Something
-        run: echo "${{ matrix.runner }}
-      
-      # Add your job steps here
+      - name: echo something
+        run: echo "Hi"
