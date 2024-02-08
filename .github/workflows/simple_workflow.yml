@@ -28,18 +28,18 @@ jobs:
 # echo "OS_LIST = ${{ env.LIST }}" >> $GITHUB_ENV
 # echo "::set-env name=OS_LIST::$OS_LIST"
       
-  # my_job:
-  #   needs: set_list
-  #   runs-on: ${{ matrix.os }}
-  #   strategy:
-  #     matrix:
-  #       os: ${{fromJson(needs.set_list.outputs.matrix).os }}
+  my_job:
+    needs: set_list
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ${{ needs.set_list.outputs.matrix }}
 
-  #   steps:
-  #   - name: Check-out
-  #     uses: actions/checkout@v4
-  #   - name: Echo A Var
-  #     run: echo ${{ matrix.os }}
+    steps:
+    - name: Check-out
+      uses: actions/checkout@v4
+    - name: Echo A Var
+      run: echo ${{ matrix.os }}
 #   build1:
 #     runs-on: ubuntu-latest
 
