@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: Set os list
       run: |
-        matrix= "${{ env.LIST }}"
+        matrix="${{ env.LIST }}"
         echo "matrix={\"include\": [${matrix}]}" >> $GITHUB_ENV
         echo $matrix
 # echo "OS_LIST = ${{ env.LIST }}" >> $GITHUB_ENV
