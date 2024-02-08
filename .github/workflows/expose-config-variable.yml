@@ -7,9 +7,10 @@ on:
 
 jobs:
   expose-variable:
+    environment: env1
     runs-on: ubuntu-latest
     outputs:
       runnerList: ${{ steps.expose.outputs.runnerList }}
     steps:
       - name: Expose Runner List
-        run: echo "::set-output name=runnerList::${{ toJson(env.RUNNER_LIST) }}"
+        run: echo "::set-output name=runnerList::${{ toJson(var.RUNNER_LIST) }}"
