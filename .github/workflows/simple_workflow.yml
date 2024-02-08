@@ -5,13 +5,20 @@ on:
     workflows: ["Expose Configuration Variable"]
     types:
       - completed
+  workflow_dispatch:
 
 jobs:
   my_job:
-    runs-on: ${{ fromJson(needs.expose-variable.outputs.runnerList) }}
+    runs-on: ${{ matrix.os }}
     needs: expose-variable
+    strategy:
+      matrix:
+        os: ${{fromJson(needs.expose-variable.outputs.runnerList)}}
+
     steps:
       - name: Check-out
         uses: actions/checkout@v4
-      - name: echo something
-        run: echo "Hi"
+      - name: echo
+        run: echo "${{ matrix.os }}
+      
+      # Add your job steps here
