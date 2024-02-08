@@ -8,7 +8,7 @@ jobs:
   set_list:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ needs.expose-variable.outputs.LIST }}
+      matrix: ${{ needs.expose-variable.outputs.osList }}
     steps:
       - name: Use Exposed OS List
         run: echo ${{ matrix.os }}
