@@ -16,7 +16,6 @@ jobs:
           matrix="${{vars.RUNNERS}}" 
           echo "$matrix"
           echo "matrix={\"include\":$matrix} >> $GITHUB_OUTPUT"
-          echo "${{ steps.job1.outputs.matrix }}"
   # expose-variable:
   #   environment: env1
   #   runs-on: ubuntu-latest
