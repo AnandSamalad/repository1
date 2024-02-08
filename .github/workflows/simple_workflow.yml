@@ -8,8 +8,6 @@ jobs:
   set_list:
     runs-on: ubuntu-latest
     environment: env1
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
     - name: Set os list
       run: |
@@ -19,7 +17,7 @@ jobs:
 # echo "::set-output name=matrix::${matrix}"
      
     - name: Echo the output
-      run: echo "${{ steps.set-matrix.outputs.matrix }}"
+      run: echo $steps.set-matrix.outputs.matrix
         
 # echo "::set-output name=matrix::${matrix}"
 # matrix="${{ env.LIST }}"
@@ -29,6 +27,8 @@ jobs:
 # echo "::set-env name=OS_LIST::$OS_LIST"
       
   my_job:
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     needs: set_list
     runs-on: ${{ matrix.os }}
     strategy:
