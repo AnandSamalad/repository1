@@ -15,7 +15,6 @@ jobs:
         run: echo "This is a dummy step."
   my_job:
     runs-on: ${{ matrix.os }}
-    needs: expose-variable
     strategy:
       matrix:
         os: ${{fromJson(needs.expose-variable.outputs.runnerList)}}
