@@ -11,7 +11,7 @@ jobs:
       dummy: ${{ steps.expose-dummy.outputs.dummy }}
     steps:
       - name: echo a dummy output
-        run: echo "::set-output name=runnerList::${{ ["ubuntu-latest", "windows-latest", "macos-latest"] }}"
+        run: echo "::set-output name=runnerList::"["ubuntu-latest", "windows-latest", "macos-latest"]""
   # expose-variable:
   #   environment: env1
   #   runs-on: ubuntu-latest
