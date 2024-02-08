@@ -4,14 +4,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  expose-variable:
-    environment: env1
+  expose-dummy:
     runs-on: ubuntu-latest
     outputs:
-      runnerList: ${{ steps.expose.outputs.runnerList }}
+      dummy: ${{ steps.expose-dummy.outputs.dummy }}
     steps:
-      - name: Expose Runner List
-        run: echo "::set-output name=runnerList::${{ toJson(vars.RUNNER_LIST) }}"
+      - name: echo a dummy output
+        run: echo "::set-output name=runnerList::${{ ["ubuntu-latest", "windows-latest", "macos-latest"] }}"
+  # expose-variable:
+  #   environment: env1
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     runnerList: ${{ steps.expose.outputs.runnerList }}
+  #   steps:
+  #     - name: Expose Runner List
+  #       run: echo "::set-output name=runnerList::${{ toJson(vars.RUNNER_LIST) }}"
 
   dummy_job:
     runs-on: ubuntu-latest
@@ -19,17 +26,17 @@ jobs:
       - name: Dummy Step
         run: echo "This is a dummy step."
       - name: Print runnerList
-        run: echo "Runner list:${{ needs.expose-variable.outputs.runnerList }}"
-  my_job:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: ${{fromJson(needs.expose-variable.outputs.runnerList)}}
+        run: echo "Runner list:${{ needs.expose-dummy.outputs.dummy }}"
+  # my_job:
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     matrix:
+  #       os: ${{fromJson(needs.expose-variable.outputs.runnerList)}}
 
-    steps:
-      - name: Check-out
-        uses: actions/checkout@v4
-      - name: echo
-        run: echo "${{ matrix.os }}
+  #   steps:
+  #     - name: Check-out
+  #       uses: actions/checkout@v4
+  #     - name: echo
+  #       run: echo "${{ matrix.os }}
       
       # Add your job steps here
