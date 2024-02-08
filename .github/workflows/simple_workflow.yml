@@ -15,7 +15,8 @@ jobs:
       run: |
         matrix="${{ env.LIST }}"
         echo "matrix={\"os\": [${matrix}]}" >> $GITHUB_ENV
-        echo "::set-output name=matrix::${matrix}"
+        echo "::set-output name=matrix::{\"os\": [${matrix}]}"
+# echo "::set-output name=matrix::${matrix}"
 # matrix="${{ env.LIST }}"
 # echo "matrix={\"os\": [${matrix}]}" >> $GITHUB_ENV
 # echo "${{ steps.set_list.outputs.matrix }}"
