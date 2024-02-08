@@ -43,7 +43,9 @@ jobs:
 
     - name: Read JSON file and set output
       # id: read_json
-      run: echo ${{ vars.LIST }}
+      # run: echo ${{ vars.LIST }}
+      with:
+          environment: ${{ vars.LIST }}
 
           # JSON=$(cat ./deployment-config.json)
           # echo "$JSON" >> "${GITHUB_OUTPUT}"
