@@ -1,98 +1,27 @@
-name: Simple Workflow
+name: Main Workflow
 
 on:
   push:
     branches: [ "*" ]
-    
+
 jobs:
   set_list:
     runs-on: ubuntu-latest
-    environment: env1
+    outputs:
+      matrix: ${{ needs.expose-variable.outputs.LIST }}
     steps:
-    - name: Set os list
-      run: echo "::set-env name=OS_LIST::${{ secrets.OS_LIST }}"
-  # matrix="${{ vars.LIST }}"
-  # echo "matrix={${matrix}}" >> $GITHUB_ENV
-  # echo "::set-output name=matrix::{[${matrix}]}"
-# echo "::set-output name=matrix::${matrix}"
-     
-    # - name: Echo the output
-    #   run: echo $steps.set-matrix.outputs.matrix
-        
-# echo "::set-output name=matrix::${matrix}"
-# matrix="${{ env.LIST }}"
-# echo "matrix={\"os\": [${matrix}]}" >> $GITHUB_ENV
-# echo "${{ steps.set_list.outputs.matrix }}"
-# echo "OS_LIST = ${{ env.LIST }}" >> $GITHUB_ENV
-# echo "::set-env name=OS_LIST::$OS_LIST"
-      
+      - name: Use Exposed OS List
+        run: echo ${{ matrix.os }}
+
   my_job:
-    # outputs:
-    #   matrix: ${{ steps.set-matrix.outputs.matrix }}
     needs: set_list
-    environment: env1
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ${{ fromJson(env.OS_LIST) }}
+        os: ${{fromJson(needs.set_list.outputs.matrix)}}
 
     steps:
-    - name: Check-out
-      uses: actions/checkout@v4
-    - name: Echo A Var
-      run: echo ${{ matrix.os }}
-#   build1:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#     - name: Checkout Repository
-#       uses: actions/checkout@v4
-#       with:
-#         environment: echo "./deployment-config.json"     
-    
-
-#   build2:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         environment: ${{ fromJson(inputs.environment) }}
-#         fast-fail: [true]
-#     steps:
-#     - name: echo1
-#       run: echo ${{ matrix.environment }}
-
-# name: Simple Workflow
-
-# on:
-#   push:
-#     branches: [ "*" ]
-
-# jobs:
-#   build1:
-#     runs-on: ubuntu-latest
-#     # outputs:
-#     #   environment: ${{ steps.read_json.outputs.environment }}
-#     environment: env1
-#     steps:
-#     - name: Checkout Repository
-#       uses: actions/checkout@v4
-#       with:
-#           environment: ${{ vars.LIST }}
-
-    # - name: Read JSON file and set output
-      # id: read_json
-      # run: echo ${{ vars.LIST }}
-
-          # JSON=$(cat ./deployment-config.json)
-          # echo "$JSON" >> "${GITHUB_OUTPUT}"
-
-  # build2:
-  #   runs-on: ubuntu-latest
-  #   needs: build1
-  #   # strategy:
-  #   #   matrix:
-  #   #     environment: ${{fromJson(needs.build1.outputs.environment)}}
-  #   #     fast-fail: [true]
-  #   steps:
-  #   - name: echo1
-  #     run: echo "${GITHUB_OUTPUT}"
+      - name: Check-out
+        uses: actions/checkout@v4
+      - name: Echo A Var
+        run: echo ${{ matrix.os }}
