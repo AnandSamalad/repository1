@@ -7,10 +7,11 @@ on:
 jobs:
   set_list:
     runs-on: ubuntu-latest
+    environment: env1
     steps:
     - name: Set os list
       run: |
-        OS_LIST = ${{ vars.LIST }}
+        OS_LIST = ${{ vars.LIST }} 
         echo "::set-env name=OS_LIST::$OS_LIST"
       
   my_job:
