@@ -28,7 +28,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ${{ steps.set_list.outputs.matrix }}
+        os: ${{fromJson(needs.set_list.outputs.matrix).os }}
 
     steps:
     - name: Check-out
