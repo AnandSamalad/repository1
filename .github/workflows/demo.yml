@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    #environment: demo
+    environment: demo
     outputs:
       matrix: ${{ steps.demo.outputs.sample }}
       #matrix2: ${{ steps.demo2.outputs.sample2 }}
