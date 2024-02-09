@@ -6,9 +6,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: demo
+    #environment: demo
     outputs:
       matrix: ${{ steps.demo.outputs.sample }}
+      #matrix2: ${{ steps.demo2.outputs.sample2 }}
     steps:
     - name: Run tests
       run: echo "${{ vars.DEMO }}"
@@ -19,7 +20,7 @@ jobs:
   example_matrix:
     runs-on: ${{ matrix.version }}
     needs: build
-    environment: demo
+    #environment: demo
     strategy:
       matrix:
         version: ${{fromJSON(needs.build.outputs.matrix)}}
