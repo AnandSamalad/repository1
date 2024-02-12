@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     # needs: build1
     environment:
-      name: ${ { matrix.envn } }
-    strategy:
-      matrix:
-        envn: ${{ inputs.target-env }}
+      name: ${ { inputs.target-env } }
+    # strategy:
+    #   matrix:
+    #     envn: ${{ inputs.target-env }}
     # strategy:
     #   matrix:
     #     envn: ${{fromJSON(needs.env.outputs.matrix)}}
