@@ -5,11 +5,11 @@ on:
       - "*"
 
 jobs:
-  build:
+  build_env:
     strategy:
       fail-fast: true
       matrix:
-        target: [demo, demo2 ]
+        target: [demo, demo2]
     uses: ./.github/workflows/demo.yml
     with:
       target-env: ${ { matrix.target } }
