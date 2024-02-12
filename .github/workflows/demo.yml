@@ -4,9 +4,25 @@ on:
     branches:
       - "*"
 jobs:
+
+  build1:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.envs.outputs.env }}
+    steps:
+    - name: Run tests
+      run: echo "${{ vars.DEMO }}"
+    - name: demo
+      id: envs
+      run: echo "env=${{ vars.envs }}" >> $GITHUB_OUTPUT
+
+
   build:
     runs-on: ubuntu-latest
-    environment: demo
+    strategy:
+      matrix:
+        envn: ${{fromJSON(needs.env.outputs.matrix)}}
+    environment: ${{ matrix.envn }}
     outputs:
       matrix: ${{ steps.demo.outputs.sample }}
       #matrix2: ${{ steps.demo2.outputs.sample2 }}
@@ -16,6 +32,8 @@ jobs:
     - name: demo
       id: demo
       run: echo "sample=${{ vars.DEMO }}" >> $GITHUB_OUTPUT
+
+
 
   example_matrix:
     runs-on: ${{ matrix.version }}
