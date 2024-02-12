@@ -1,26 +1,18 @@
 name: Animal Farm NodeJS CI
 on:
-  push:
-    branches:
-      - "*"
+  workflow_call:
+    inputs:
+      target-env:
+        required: true
+        type: string
 
 jobs:
-
-  # build1:
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     matrix: ${{ steps.envs.outputs.env }}
-  #   steps:
-  #   - name: Run tests
-  #     run: echo "${{ vars.ENVS }}"
-  #   - name: demo
-  #     id: envs
-  #     run: echo "env=${{ vars.envs }}" >> $GITHUB_OUTPUT
 
   build:
     runs-on: ubuntu-latest
     # needs: build1
-    environment: [demo, demo2]
+    environment: 
+      name: ${{ inputs.target-env }}
     # strategy:
     #   matrix:
     #     envn: ${{fromJSON(needs.env.outputs.matrix)}}
