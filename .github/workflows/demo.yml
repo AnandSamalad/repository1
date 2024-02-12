@@ -6,25 +6,25 @@ on:
 
 jobs:
 
-  build1:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.envs.outputs.env }}
-    steps:
-    - name: Run tests
-      run: echo "${{ vars.ENVS }}"
-    - name: demo
-      id: envs
-      run: echo "env=${{ vars.envs }}" >> $GITHUB_OUTPUT
+  # build1:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     matrix: ${{ steps.envs.outputs.env }}
+  #   steps:
+  #   - name: Run tests
+  #     run: echo "${{ vars.ENVS }}"
+  #   - name: demo
+  #     id: envs
+  #     run: echo "env=${{ vars.envs }}" >> $GITHUB_OUTPUT
 
   build:
     runs-on: ubuntu-latest
     needs: build1
     environment: 
-      name: ${{ matrix.envn }}
-    strategy:
-      matrix:
-        envn: ${{fromJSON(needs.env.outputs.matrix)}}
+      name: [demo, demo2]
+    # strategy:
+    #   matrix:
+    #     envn: ${{fromJSON(needs.env.outputs.matrix)}}
     outputs:
       matrix: ${{ steps.demo.outputs.sample }}
       #matrix2: ${{ steps.demo2.outputs.sample2 }}
