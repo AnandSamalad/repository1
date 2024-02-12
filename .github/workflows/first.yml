@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        target: [Development, Production ]
+        target: [demo, demo2 ]
     uses: ./.github/workflows/demo.yml
     with:
       target-env: ${ { matrix.target } }
