@@ -21,7 +21,7 @@ jobs:
     needs: build1
     environment: ${{ matrix.environment }} 
     strategy:
-      # max-parallel: 1
+      max-parallel: 2
       matrix:
         environment: ${{ fromJSON(needs.build1.outputs.matrix) }}
     outputs:
