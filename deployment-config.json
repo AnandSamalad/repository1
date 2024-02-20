@@ -1,8 +1,7 @@
 [
   {
-    "risk-dev-int1",
-    "om-lmc1-int2",
-    "om-lmc2-int3",
-    "Fourth line"
+    "c1" : "app_runner"
   }
 ]
+
+["c1: db_runner", ]
