@@ -19,7 +19,7 @@ jobs:
   example_matrix:
     runs-on: ${{ matrix.version }}
     needs: build
-    environment: demo
+    # environment: demo
     strategy:
       matrix:
         version: ${{fromJSON(needs.build.outputs.matrix)}}
