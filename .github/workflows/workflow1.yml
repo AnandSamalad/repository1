@@ -6,7 +6,7 @@ on:
 jobs:
   build1:
     runs-on: ubuntu-latest
-    environment: demo
+    environment: envs
     outputs:
       matrix: ${{ steps.envs.outputs.sample }}
     steps:
@@ -23,7 +23,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        environment: ${{needs.build1.outputs.matrix}}
+        environment: ${{ needs.build1.outputs.matrix }}
       # name: demo, demo2
     # outputs:
     #   matrix: ${{ steps.demo.outputs.sample }}
