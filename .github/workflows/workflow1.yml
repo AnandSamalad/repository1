@@ -24,22 +24,22 @@ jobs:
       matrix:
         environment: [demo, demo2]
       # name: demo, demo2
-    outputs:
-      matrix: ${{ steps.demo.outputs.sample }}
+    # outputs:
+    #   matrix: ${{ steps.demo.outputs.sample }}
     steps:
     - name: Run tests
       run: echo "${{ vars.DEMO }}"
-    - name: demo
-      id: demo
-      run: echo "sample=${{ vars.DEMO }}" >> $GITHUB_OUTPUT
+    # - name: demo
+    #   id: demo
+    #   run: echo "sample=${{ vars.DEMO }}" >> $GITHUB_OUTPUT
 
-  example_matrix:
-    runs-on: ${{ matrix.version }}
-    needs: build2
-    # environment: demo
-    strategy:
-      matrix:
-        version: ${{fromJSON(needs.build2.outputs.matrix)}}
-    steps:
-    - name: devil
-      run: echo "sample"
+  # example_matrix:
+  #   runs-on: ${{ matrix.version }}
+  #   needs: build2
+  #   # environment: demo
+  #   strategy:
+  #     matrix:
+  #       version: ${{fromJSON(needs.build2.outputs.matrix)}}
+  #   steps:
+  #   - name: devil
+  #     run: echo "sample"
