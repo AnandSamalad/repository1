@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: demo
     outputs:
-      matrix: ${{ steps.env.outputs.sample }}
+      matrix: ${{ steps.envs.outputs.sample }}
     steps:
     - name: Run tests
       run: echo "${{ vars.envs }}"
