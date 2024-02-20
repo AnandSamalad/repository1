@@ -19,6 +19,7 @@ jobs:
   build2:
     runs-on: ubuntu-latest
     # needs: build1
+    environment: ${{ matrix.environment }} 
     strategy:
       max-parallel: 1
       matrix:
