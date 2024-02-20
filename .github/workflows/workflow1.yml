@@ -19,8 +19,8 @@ jobs:
   build2:
     runs-on: ubuntu-latest
     # needs: build1
-    environment: 
-      name: demo, demo2
+    environment: demo
+      # name: demo, demo2
     outputs:
       matrix: ${{ steps.demo.outputs.sample }}
     steps:
@@ -37,6 +37,7 @@ jobs:
     strategy:
       matrix:
         version: ${{fromJSON(needs.build2.outputs.matrix)}}
+        environtment: [demo, demo2]
     steps:
     - name: devil
       run: echo "sample"
