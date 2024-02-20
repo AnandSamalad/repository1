@@ -4,7 +4,7 @@ on:
     branches:
       - "*"
 jobs:
-  # env_build:
+  # build1:
   #   runs-on: ubuntu-latest
   #   environment: demo
   #   outputs:
@@ -18,16 +18,16 @@ jobs:
 
   build2:
     runs-on: ubuntu-latest
-    # needs: env_build
-    environment: demo
+    # needs: build1
+    environment: demo2
     outputs:
-      matrix: ${{ steps.demo.outputs.sample }}
+      matrix: ${{ steps.demo2.outputs.sample }}
     steps:
     - name: Run tests
       run: echo "${{ vars.DEMO }}"
-    - name: demo
-      id: demo
-      run: echo "sample=${{ vars.DEMO }}" >> $GITHUB_OUTPUT
+    - name: demo2
+      id: demo2
+      run: echo "sample=${{ vars.DEMO2 }}" >> $GITHUB_OUTPUT
 
   example_matrix:
     runs-on: ${{ matrix.version }}
